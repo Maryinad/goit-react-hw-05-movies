@@ -1,14 +1,14 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
 import { Outlet } from 'react-router-dom';
+import { StyledNavLink } from './Layout.styled';
 
 export function Layout() {
   return (
     <>
       <header>
         <nav>
-          <NavLink to="/">Home</NavLink>
-          <NavLink to="/movies">Movies</NavLink>
+          <StyledNavLink to="/">Home</StyledNavLink>
+          <StyledNavLink to="/movies">Movies</StyledNavLink>
         </nav>
       </header>
       <main>
