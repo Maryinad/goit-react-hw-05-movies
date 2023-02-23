@@ -1,7 +1,8 @@
 import React from 'react';
 import { useEffect, useState } from 'react';
-import { TrendingFilm } from '../components/TrendingFilms/TrendingFilm';
+import { TrendingFilm } from '../../components/TrendingFilms/TrendingFilm';
 import { fetchFilmsData } from 'servisies/Api';
+// import { useLocation } from 'react-router-dom';
 
 export function HomePage() {
   const [films, setFilms] = useState([]);
@@ -21,3 +22,5 @@ export function HomePage() {
 
   return <>{films.length !== 0 && <TrendingFilm filmsData={films} />}</>;
 }
+
+export default HomePage;

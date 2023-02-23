@@ -1,11 +1,13 @@
 import React from 'react';
-import { Link, Outlet, useParams } from 'react-router-dom';
+import { Link, Outlet, useLocation, useParams } from 'react-router-dom';
 import { MovieCard } from 'components/MovieCard/MovieCard';
 import { useEffect, useState } from 'react';
 import { getFilmsDataById } from 'servisies/Api';
 import { Loader } from '../../components/Loader/Loader';
 
-export function MovieDetails() {
+function MovieDetails() {
+  const location = useLocation();
+  // console.log(location);
   // moviesId то что в App  <Route path="/movies/:moviesId" element={<MovieDetails />}
   const { moviesId } = useParams();
   // console.log(moviesId);
@@ -36,7 +38,7 @@ export function MovieDetails() {
   return (
     <>
       {error && <p>Ooops, error: {error}</p>}
-      <Link to="/">Go back</Link>
+      <Link to={location.state?.from ?? '/'}>Go back</Link>
       {isLoading && <Loader />}
       {details && <MovieCard details={details} />}
       <div>
@@ -55,4 +57,4 @@ export function MovieDetails() {
   );
 }
 
-// https://image.tmdb.org/t/p/original/'
+export default MovieDetails;

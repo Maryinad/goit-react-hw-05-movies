@@ -1,7 +1,8 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 export function TrendingFilm({ filmsData }) {
+  const location = useLocation();
   // console.log('filmsData', filmsData);
   return (
     <>
@@ -10,9 +11,13 @@ export function TrendingFilm({ filmsData }) {
         {filmsData.map(({ name, id, title }) => (
           <li key={id}>
             {name ? (
-              <Link to={`/movies/${id}`}>{name}</Link>
+              <Link state={{ from: location }} to={`/movies/${id}`}>
+                {name}
+              </Link>
             ) : (
-              <Link to={`/movies/${id}`}>{title}</Link>
+              <Link state={{ from: location }} to={`/movies/${id}`}>
+                {title}
+              </Link>
             )}
           </li>
         ))}

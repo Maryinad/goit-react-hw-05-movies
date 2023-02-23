@@ -1,4 +1,5 @@
 import React from 'react';
+import { Container, TextContainer } from './MovieCard.styled';
 
 export function MovieCard({ details }) {
   const {
@@ -12,19 +13,24 @@ export function MovieCard({ details }) {
   //   console.log('fggg', details);
 
   return (
-    <div>
+    <Container>
       <img
         src={'https://image.tmdb.org/t/p/w500/' + poster_path}
         alt={original_title}
         width="250"
-      ></img>
-
-      <h2>
-        {original_title} <span> ({release_date})</span>
-      </h2>
-      <p>User score: {Math.round(vote_average * 10)}% </p>
-      <p>Overview: {overview}</p>
-      <p>Genres: {genres}</p>
-    </div>
+      />
+      <TextContainer>
+        <h2>
+          {original_title} <span> ({release_date})</span>
+        </h2>
+        <p style={{ fontWeight: 'bold' }}>
+          User score: {Math.round(vote_average * 10)}%
+        </p>
+        <p style={{ fontWeight: 'bold' }}>Overview:</p>
+        <p>{overview}</p>
+        <p style={{ fontWeight: 'bold' }}>Genres:</p>
+        <p>{genres}</p>
+      </TextContainer>
+    </Container>
   );
 }

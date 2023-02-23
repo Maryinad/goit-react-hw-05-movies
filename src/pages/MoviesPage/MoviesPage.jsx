@@ -1,20 +1,23 @@
 import { Loader } from 'components/Loader/Loader';
 import { SearchForm } from 'components/SearchForm/SearchForm';
 import React, { useEffect, useState } from 'react';
-import { Link, useSearchParams } from 'react-router-dom';
+import { Link, useLocation, useSearchParams } from 'react-router-dom';
 import { searchFilmsData } from 'servisies/Api';
 
-export function MoviesPage() {
+function MoviesPage() {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
   const [searchParams, setSearchParams] = useSearchParams();
   const [querySearch, setQuerySearch] = useState([]);
+  const location = useLocation();
+  // console.log('MoviesPage', location);
 
+  //указываем ключ query
   const searchQuery = searchParams.get('query');
 
   const onSubmit = query => {
     setSearchParams({ query: query });
-    console.log('query', query);
+    // console.log('query', query);
   };
 
   useEffect(() => {
@@ -23,7 +26,7 @@ export function MoviesPage() {
       try {
         setIsLoading(true);
         const searchFilms = await searchFilmsData(searchQuery);
-        console.log('searchFilms', searchFilms);
+        // console.log('searchFilms', searchFilms);
         setQuerySearch(searchFilms);
       } catch (error) {
         setError(error.message);
@@ -46,7 +49,9 @@ export function MoviesPage() {
             return (
               <>
                 <li key={id}>
-                  <Link to={`/movies/${id}`}>{title}</Link>
+                  <Link state={{ from: location }} to={`/movies/${id}`}>
+                    {title}
+                  </Link>
                 </li>
               </>
             );
@@ -55,3 +60,5 @@ export function MoviesPage() {
     </div>
   );
 }
+
+export default MoviesPage;
