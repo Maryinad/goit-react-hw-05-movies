@@ -9,6 +9,7 @@ import { ErrorPage } from 'pages/ErrorPage/ErrorPage';
 import { Cast } from './Cast/Cast';
 import { Reviews } from './Reviews/Reviews';
 import { Loader } from './Loader/Loader';
+import { Container } from './App.styled';
 
 const LazyHomePage = lazy(() => import('../pages/HomePage/HomePage'));
 const LazyMoviesPage = lazy(() => import('../pages/MoviesPage/MoviesPage'));
@@ -19,19 +20,21 @@ const LazyMovieDetails = lazy(() =>
 export const App = () => {
   return (
     <main>
-      <Suspense fallback={<Loader />}>
-        <Routes>
-          <Route path="/" element={<Layout />}>
-            <Route index element={<LazyHomePage />}></Route>
-            <Route path="/movies" element={<LazyMoviesPage />} />
-            <Route path="/movies/:moviesId" element={<LazyMovieDetails />}>
-              <Route path="cast" element={<Cast />} />
-              <Route path="reviews" element={<Reviews />} />
+      <Container>
+        <Suspense fallback={<Loader />}>
+          <Routes>
+            <Route path="/" element={<Layout />}>
+              <Route index element={<LazyHomePage />}></Route>
+              <Route path="/movies" element={<LazyMoviesPage />} />
+              <Route path="/movies/:moviesId" element={<LazyMovieDetails />}>
+                <Route path="cast" element={<Cast />} />
+                <Route path="reviews" element={<Reviews />} />
+              </Route>
+              <Route path="*" element={<ErrorPage />} />
             </Route>
-            <Route path="*" element={<ErrorPage />} />
-          </Route>
-        </Routes>
-      </Suspense>
+          </Routes>
+        </Suspense>
+      </Container>
     </main>
   );
 };

@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 export function TrendingFilm({ filmsData }) {
   const location = useLocation();
@@ -25,3 +26,13 @@ export function TrendingFilm({ filmsData }) {
     </>
   );
 }
+
+TrendingFilm.propTypes = {
+  filmsData: PropTypes.arrayOf(
+    PropTypes.shape({
+      name: PropTypes.string.isRequired,
+      id: PropTypes.number.isRequired,
+      title: PropTypes.string.isRequired,
+    })
+  ),
+};

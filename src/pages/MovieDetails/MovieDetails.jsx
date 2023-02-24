@@ -4,6 +4,7 @@ import { MovieCard } from 'components/MovieCard/MovieCard';
 import { useEffect, useState } from 'react';
 import { getFilmsDataById } from 'servisies/Api';
 import { Loader } from '../../components/Loader/Loader';
+import { BtnBack } from './MovieDetails.styled';
 
 function MovieDetails() {
   const location = useLocation();
@@ -38,7 +39,9 @@ function MovieDetails() {
   return (
     <>
       {error && <p>Ooops, error: {error}</p>}
-      <Link to={location.state?.from ?? '/'}>Go back</Link>
+      <BtnBack to={location.state?.from ?? '/'}>
+        <span>Go back</span>
+      </BtnBack>
       {isLoading && <Loader />}
       {details && <MovieCard details={details} />}
       <div>

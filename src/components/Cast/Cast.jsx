@@ -1,11 +1,11 @@
 import { Loader } from 'components/Loader/Loader';
 import React from 'react';
 
+import defaultImg from '../../images/default-photo.jpeg';
+
 import { useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { getFilmsCredits } from 'servisies/Api';
-
-
 
 export function Cast() {
   const { moviesId } = useParams();
@@ -42,11 +42,15 @@ export function Cast() {
           {cast.map(({ id, name, profile_path, character }) => {
             return (
               <li key={id}>
-                <img
-                  src={'https://image.tmdb.org/t/p/w500/' + profile_path}
-                  alt={name}
-                  width="100"
-                />
+                {profile_path ? (
+                  <img
+                    src={'https://image.tmdb.org/t/p/w500/' + profile_path}
+                    alt={name}
+                    width="100"
+                  />
+                ) : (
+                  <img src={defaultImg} alt={name} width="100" />
+                )}
                 <p>{name}</p>
                 <p>Character: {character}</p>
               </li>

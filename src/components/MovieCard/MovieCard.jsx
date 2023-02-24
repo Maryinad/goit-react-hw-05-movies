@@ -1,5 +1,6 @@
 import React from 'react';
 import { Container, TextContainer } from './MovieCard.styled';
+import PropTypes from 'prop-types';
 
 export function MovieCard({ details }) {
   const {
@@ -34,3 +35,16 @@ export function MovieCard({ details }) {
     </Container>
   );
 }
+
+MovieCard.propTypes = {
+  details: PropTypes.arrayOf(
+    PropTypes.shape({
+      poster_path: PropTypes.string.isRequired,
+      original_title: PropTypes.string.isRequired,
+      overview: PropTypes.string.isRequired,
+      vote_average: PropTypes.number.isRequired,
+      genres: PropTypes.array.isRequired,
+      release_date: PropTypes.string.isRequired,
+    })
+  ),
+};

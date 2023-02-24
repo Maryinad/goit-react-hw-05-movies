@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
+import PropTypes from 'prop-types';
+import { Btn } from './SearchFormStyled';
 
 export function SearchForm({ onSubmit }) {
   const [searchParams] = useSearchParams();
@@ -29,8 +31,12 @@ export function SearchForm({ onSubmit }) {
           autoFocus
           onChange={handleInput}
         ></input>
-        <button>Search</button>
+        <Btn>Search</Btn>
       </form>
     </div>
   );
 }
+
+SearchForm.propTypes = {
+  onSubmit: PropTypes.func.isRequired,
+};
